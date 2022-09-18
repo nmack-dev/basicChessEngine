@@ -6,8 +6,9 @@
 
 using namespace std;
 
-Piece::Piece(std::string piece, int file, int rank) :
+Piece::Piece(std::string piece, int id, int file, int rank) :
     piece(piece),
+    id(id),
     file(file),
     rank(rank)
 {}

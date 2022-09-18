@@ -14,7 +14,7 @@ class Board
 {
 public:
     Board();
-    virtual ~Board();
+    virtual ~Board() {};
 
 private:
     std::vector<Piece*> boardPieces;
