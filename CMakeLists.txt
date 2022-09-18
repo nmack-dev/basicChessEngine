@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 14)
 # Create a sources variable with a link to all cpp files to compile
 set(SOURCES
         src/main.cpp
-)
+        src/Piece.cpp
+        )
 
 # Add an executable with the above sources
 add_executable(basicChessEngine ${SOURCES})
