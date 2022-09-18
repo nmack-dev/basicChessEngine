@@ -46,3 +46,39 @@ Board::Board()
     boardPieces.push_back(new Piece("pawn", 30, 7, 7));
     boardPieces.push_back(new Piece("pawn", 31, 8, 7));
 }
+
+Board::~Board()
+{
+    for (auto piece : boardPieces)
+    {
+        delete piece;
+    }
+}
+
+bool Board::checkLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
+{
+    // TODO: implement me...
+    return true;
+}
+
+bool Board::Move(int startFile, int startRank, int endFile, int endRank)
+{
+    // TODO: write a UT for me...
+    Piece* movePiece;
+
+    for (auto piece : boardPieces)
+    {
+        if (startFile == piece->GetFile() && startRank == piece->GetRank()) {
+            movePiece = piece;
+        }
+    }
+
+    if (NULL != movePiece && true == checkLegalMove(movePiece->GetPiece(), startFile,
+                                                    startRank, endFile, endRank)) {
+        movePiece->SetFile(endFile);
+        movePiece->SetRank(endRank);
+        return true;
+    } else {
+        return false;
+    }
+}

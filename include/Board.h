@@ -14,9 +14,12 @@ class Board
 {
 public:
     Board();
-    virtual ~Board() {};
+    virtual ~Board();
+
+    bool Move(int startFile, int startRank, int endFile, int endRank);
 
 private:
+    bool checkLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank);
     std::vector<Piece*> boardPieces;
 };
 
