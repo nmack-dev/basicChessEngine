@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(SOURCES
         src/main.cpp
         src/Piece.cpp
-        )
+        src/Board.cpp)
 
 # Add an executable with the above sources
 add_executable(basicChessEngine ${SOURCES})
