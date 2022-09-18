@@ -4,6 +4,8 @@
 
 #include "Board.h"
 
+using namespace std;
+
 Board::Board()
 {
     // Initial board position for white pieces
@@ -45,6 +47,16 @@ Board::Board()
     boardPieces.push_back(new Piece("pawn", 29, 6, 7));
     boardPieces.push_back(new Piece("pawn", 30, 7, 7));
     boardPieces.push_back(new Piece("pawn", 31, 8, 7));
+
+    // Initialize piece location cache
+    pieceCache.push_back(vector<bool> (8, true));
+    pieceCache.push_back(vector<bool> (8, true));
+    pieceCache.push_back(vector<bool> (8, false));
+    pieceCache.push_back(vector<bool> (8, false));
+    pieceCache.push_back(vector<bool> (8, false));
+    pieceCache.push_back(vector<bool> (8, false));
+    pieceCache.push_back(vector<bool> (8, true));
+    pieceCache.push_back(vector<bool> (8, true));
 }
 
 Board::~Board()
@@ -55,9 +67,10 @@ Board::~Board()
     }
 }
 
-bool Board::checkLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
+bool Board::CheckLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
 {
     // TODO: implement me...
+    // TODO: UT me...
     return true;
 }
 
@@ -73,7 +86,7 @@ bool Board::Move(int startFile, int startRank, int endFile, int endRank)
         }
     }
 
-    if (NULL != movePiece && true == checkLegalMove(movePiece->GetPiece(), startFile,
+    if (NULL != movePiece && true == CheckLegalMove(movePiece->GetPiece(), startFile,
                                                     startRank, endFile, endRank)) {
         movePiece->SetFile(endFile);
         movePiece->SetRank(endRank);

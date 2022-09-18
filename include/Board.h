@@ -16,11 +16,12 @@ public:
     Board();
     virtual ~Board();
 
+    bool CheckLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank);
     bool Move(int startFile, int startRank, int endFile, int endRank);
 
 private:
-    bool checkLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank);
     std::vector<Piece*> boardPieces;
+    std::vector<std::vector<bool>> pieceCache;
 };
 
 #endif //BASICCHESSENGINE_BOARD_H
