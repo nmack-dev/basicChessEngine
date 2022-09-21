@@ -4,6 +4,8 @@
 
 #include "Board.h"
 
+#include <stdexcept>
+
 using namespace std;
 
 Board::Board()
@@ -49,14 +51,14 @@ Board::Board()
     boardPieces.push_back(new Piece("pawn", 31, 8, 7));
 
     // Initialize piece location cache
-    pieceCache.push_back(vector<bool> (8, true));
-    pieceCache.push_back(vector<bool> (8, true));
-    pieceCache.push_back(vector<bool> (8, false));
-    pieceCache.push_back(vector<bool> (8, false));
-    pieceCache.push_back(vector<bool> (8, false));
-    pieceCache.push_back(vector<bool> (8, false));
-    pieceCache.push_back(vector<bool> (8, true));
-    pieceCache.push_back(vector<bool> (8, true));
+    pieceCache.emplace_back(8, true);
+    pieceCache.emplace_back(8, true);
+    pieceCache.emplace_back(8, false);
+    pieceCache.emplace_back(8, false);
+    pieceCache.emplace_back(8, false);
+    pieceCache.emplace_back(8, false);
+    pieceCache.emplace_back(8, true);
+    pieceCache.emplace_back(8, true);
 }
 
 Board::~Board()
@@ -67,11 +69,47 @@ Board::~Board()
     }
 }
 
-bool Board::CheckLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
+bool Board::isSquareTaken(int file, int rank)
+{
+    // TODO: implement
+    return false;
+}
+
+void Board::updateCache(int startFile, int startRank, int endFile, int endRank)
+{
+    // TODO: implement
+}
+
+bool Board::knightValidator(int startFile, int startRank, int endFile, int endRank)
+{
+
+}
+
+
+bool Board::IsLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
 {
     // TODO: implement me...
     // TODO: UT me...
-    return true;
+
+    if (false == isSquareTaken(endFile, endRank)) {
+        if (pieceType.compare("pawn")) {
+
+        } else if (pieceType.compare("knight")) {
+
+        } else if (pieceType.compare("bishop")) {
+
+        } else if (pieceType.compare("rook")) {
+
+        } else if (pieceType.compare("queen")) {
+
+        } else if (pieceType.compare("king")) {
+
+        } else {
+            throw invalid_argument("received invalid piece string");
+        }
+    } else {
+        return false;
+    }
 }
 
 bool Board::Move(int startFile, int startRank, int endFile, int endRank)
@@ -86,7 +124,7 @@ bool Board::Move(int startFile, int startRank, int endFile, int endRank)
         }
     }
 
-    if (NULL != movePiece && true == CheckLegalMove(movePiece->GetPiece(), startFile,
+    if (nullptr != movePiece && true == IsLegalMove(movePiece->GetPiece(), startFile,
                                                     startRank, endFile, endRank)) {
         movePiece->SetFile(endFile);
         movePiece->SetRank(endRank);
