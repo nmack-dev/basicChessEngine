@@ -82,7 +82,25 @@ void Board::updateCache(int startFile, int startRank, int endFile, int endRank)
 
 bool Board::knightValidator(int startFile, int startRank, int endFile, int endRank)
 {
-
+    if ((1 == (endFile - startFile)) && (2 == (endRank - startRank))) {
+        return true;
+    } else if ((1 == (endFile - startFile)) && (-2 == (endRank - startRank))) {
+        return true;
+    } else if ((2 == (endFile - startFile)) && (1 == (endRank - startRank))) {
+        return true;
+    } else if ((2 == (endFile - startFile)) && (-1 == (endRank - startRank))) {
+        return true;
+    } else if ((-1 == (endFile - startFile)) && (2 == (endRank - startRank))) {
+        return true;
+    } else if ((-1 == (endFile - startFile)) && (-2 == (endRank - startRank))) {
+        return true;
+    } else if ((-2 == (endFile - startFile)) && (1 == (endRank - startRank))) {
+        return true;
+    } else if ((-2 == (endFile - startFile)) && (-1 == (endRank - startRank))) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -90,22 +108,25 @@ bool Board::IsLegalMove(std::string pieceType, int startFile, int startRank, int
 {
     // TODO: implement me...
     // TODO: UT me...
-
-    if (false == isSquareTaken(endFile, endRank)) {
-        if (pieceType.compare("pawn")) {
-
-        } else if (pieceType.compare("knight")) {
-
-        } else if (pieceType.compare("bishop")) {
-
-        } else if (pieceType.compare("rook")) {
-
-        } else if (pieceType.compare("queen")) {
-
-        } else if (pieceType.compare("king")) {
-
+    if (0 < endFile && 0 < endRank && 9 > endFile && 9 > endRank) {
+        if (false == isSquareTaken(endFile, endRank)) {
+            if (0 == pieceType.compare("pawn")) {
+                return false;
+            } else if (0 == pieceType.compare("knight")) {
+                return knightValidator(startFile, startRank, endFile, endRank);
+            } else if (0 == pieceType.compare("bishop")) {
+                return false;
+            } else if (0 == pieceType.compare("rook")) {
+                return false;
+            } else if (0 == pieceType.compare("queen")) {
+                return false;
+            } else if (0 == pieceType.compare("king")) {
+                return false;
+            } else {
+                throw invalid_argument("received invalid piece string");
+            }
         } else {
-            throw invalid_argument("received invalid piece string");
+            return false;
         }
     } else {
         return false;

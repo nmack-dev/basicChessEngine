@@ -26,7 +26,12 @@ private:
     bool isSquareTaken(int file, int rank);
     void updateCache(int startFile, int startRank, int endFile, int endRank);
 
+    bool pawnValidator(int startFile, int startRank, int endFile, int endRank);
     bool knightValidator(int startFile, int startRank, int endFile, int endRank);
+    bool bishopValidator(int startFile, int startRank, int endFile, int endRank);
+    bool rookValidator(int startFile, int startRank, int endFile, int endRank);
+    bool queenValidator(int startFile, int startRank, int endFile, int endRank);
+    bool kingValidator(int startFile, int startRank, int endFile, int endRank);
 };
 
 #endif //BASICCHESSENGINE_BOARD_H
