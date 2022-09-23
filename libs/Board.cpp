@@ -103,11 +103,22 @@ bool Board::knightValidator(int startFile, int startRank, int endFile, int endRa
     }
 }
 
+bool Board::bishopValidator(int startFile, int startRank, int endFile, int endRank)
+{
+    int bishopMoveSlope = (endFile - startFile) / (endRank - startRank);
+
+    if (1 == bishopMoveSlope || -1 == bishopMoveSlope) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 bool Board::IsLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
 {
     // TODO: implement me...
     // TODO: UT me...
+    // TODO: move this conditional to ::Move(...)
     if (0 < endFile && 0 < endRank && 9 > endFile && 9 > endRank) {
         if (false == isSquareTaken(endFile, endRank)) {
             if (0 == pieceType.compare("pawn")) {
@@ -115,7 +126,7 @@ bool Board::IsLegalMove(std::string pieceType, int startFile, int startRank, int
             } else if (0 == pieceType.compare("knight")) {
                 return knightValidator(startFile, startRank, endFile, endRank);
             } else if (0 == pieceType.compare("bishop")) {
-                return false;
+                return bishopValidator(startFile, startRank, endFile, endRank);
             } else if (0 == pieceType.compare("rook")) {
                 return false;
             } else if (0 == pieceType.compare("queen")) {
