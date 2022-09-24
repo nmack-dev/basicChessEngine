@@ -7,9 +7,10 @@
 
 #include <string>
 #include <vector>
+#include <boost/graph/adjacency_list.hpp>
 
 #include "Piece.h"
-
++
 class Board
 {
 public:
@@ -20,6 +21,11 @@ public:
     bool Move(int startFile, int startRank, int endFile, int endRank);
 
 private:
+    boost::adjacency_list<>
+            create_empty_directed_graph() noexcept {
+        return {};
+    }
+
     std::vector<Piece*> boardPieces;
     std::vector<std::vector<bool>> pieceCache;
 

@@ -114,6 +114,27 @@ bool Board::bishopValidator(int startFile, int startRank, int endFile, int endRa
     }
 }
 
+bool Board::rookValidator(int startFile, int startRank, int endFile, int endRank)
+{
+    if (endFile == startFile && endRank != startRank) {
+        return true;
+    } else if (endFile != startFile && endRank == startRank) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Board::queenValidator(int startFile, int startRank, int endFile, int endRank)
+{
+    if (true == bishopValidator(startFile, startRank, endFile, endRank) ||
+        true == rookValidator(startFile, startRank, endFile, endRank)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 bool Board::IsLegalMove(std::string pieceType, int startFile, int startRank, int endFile, int endRank)
 {
     // TODO: implement me...
@@ -128,9 +149,9 @@ bool Board::IsLegalMove(std::string pieceType, int startFile, int startRank, int
             } else if (0 == pieceType.compare("bishop")) {
                 return bishopValidator(startFile, startRank, endFile, endRank);
             } else if (0 == pieceType.compare("rook")) {
-                return false;
+                return rookValidator(startFile, startRank, endFile, endRank);
             } else if (0 == pieceType.compare("queen")) {
-                return false;
+                return queenValidator(startFile, startRank, endFile, endRank);
             } else if (0 == pieceType.compare("king")) {
                 return false;
             } else {

@@ -3,6 +3,8 @@ project(basicChessEngine)
 
 set(CMAKE_CXX_STANDARD 14)
 
+FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
+
 # Create a sources variable with a link to all cpp files to compile
 set(SOURCES
         libs/Piece.cpp
@@ -15,12 +17,13 @@ add_library(basicChessEngine_lib ${SOURCES})
 target_include_directories(basicChessEngine_lib
         PRIVATE
         ${PROJECT_SOURCE_DIR}/include
+        ${Boost_INCLUDE_DIR}
 )
 
 # Add an executable with the above sources
 add_executable(basicChessEngine src/main.cpp)
 
-target_link_libraries(basicChessEngine basicChessEngine_lib)
+target_link_libraries(basicChessEngine basicChessEngine_lib ${Boost_LIBRARIES})
 
 # Unit Testing
 ########################################################################################################################
