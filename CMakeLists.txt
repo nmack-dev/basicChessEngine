@@ -8,7 +8,9 @@ FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
 # Create a sources variable with a link to all cpp files to compile
 set(SOURCES
         libs/Piece.cpp
-        libs/Board.cpp)
+        libs/GameEngine.cpp
+        libs/Board.cpp
+        libs/Square.cpp)
 
 add_library(basicChessEngine_lib ${SOURCES})
 
@@ -39,7 +41,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 set(UNITTESTS
-        ut/BoardTests.cpp)
+        ut/GameEngineTests.cpp)
 
 add_executable(basicChessEngine_ut ${UNITTESTS})
 target_link_libraries(basicChessEngine_ut gtest_main basicChessEngine_lib)
