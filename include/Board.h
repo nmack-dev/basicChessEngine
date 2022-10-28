@@ -5,23 +5,23 @@
 #ifndef BASICCHESSENGINE_BOARD_H
 #define BASICCHESSENGINE_BOARD_H
 
-#include "Square.h"
+#include "Piece.h"
 
 class Board
 {
 public:
-    Board() {};
-    virtual ~Board() {};
+    Board() {}
+    virtual ~Board();
 
     void GenerateBoard();
+    Piece* GetPiece(int file, int rank);
+    void MovePiece(int startFile, int startRank, int endFile, int endRank);
 
 private:
     static const int numFileSquares = 8;
     static const int numRankSquares = 8;
-    Square* board[numFileSquares][numRankSquares];
+    Piece* board[numFileSquares][numRankSquares];
 
-    void populatePawns(Square* rank);
-    void populatePieces(Square* rank);
 };
 
 #endif //BASICCHESSENGINE_BOARD_H

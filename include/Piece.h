@@ -10,25 +10,19 @@
 class Piece
 {
 public:
-    Piece(std::string piece, int id, int file, int rank);
+    Piece(std::string piece, std::string color, int id);
     virtual ~Piece() {}
 
     std::string GetPiece();
     void SetPiece(std::string piece);
 
+    std::string GetColor();
     int GetId();
-
-    int GetFile();
-    void SetFile(int file);
-
-    int GetRank();
-    void SetRank(int rank);
 
 private:
     std::string piece;
+    std::string color;
     int id;
-    int file;
-    int rank;
 };
 
 #endif //BASICCHESSENGINE_PIECE_H

@@ -2,82 +2,29 @@
 // Created by nmack on 9/18/22.
 //
 
-#include "GameEngine.h"
-
 #include <stdexcept>
+
+#include "GameEngine.h"
 
 using namespace std;
 
-GameEngine::GameEngine()
+GameEngine::GameEngine(Board* board) : board(board)
 {
-    // Initial board position for white pieces
-    boardPieces.push_back(new Piece("rook", 0, 1, 1));
-    boardPieces.push_back(new Piece("knight", 1, 2, 1));
-    boardPieces.push_back(new Piece("bishop", 2, 3, 1));
-    boardPieces.push_back(new Piece("queen", 3, 4, 1));
-    boardPieces.push_back(new Piece("king", 4, 5, 1));
-    boardPieces.push_back(new Piece("bishop", 5, 6, 1));
-    boardPieces.push_back(new Piece("knight", 6, 7, 1));
-    boardPieces.push_back(new Piece("rook", 7, 8, 1));
-
-    // Initial position for white pawns
-    boardPieces.push_back(new Piece("pawn", 8, 1, 2));
-    boardPieces.push_back(new Piece("pawn", 9, 2, 2));
-    boardPieces.push_back(new Piece("pawn", 10, 3, 2));
-    boardPieces.push_back(new Piece("pawn", 11, 4, 2));
-    boardPieces.push_back(new Piece("pawn", 12, 5, 2));
-    boardPieces.push_back(new Piece("pawn", 13, 6, 2));
-    boardPieces.push_back(new Piece("pawn", 14, 7, 2));
-    boardPieces.push_back(new Piece("pawn", 15, 8, 2));
-
-    // Initial position for black pieces
-    boardPieces.push_back(new Piece("rook", 16, 1, 8));
-    boardPieces.push_back(new Piece("knight", 17, 2, 8));
-    boardPieces.push_back(new Piece("bishop", 18, 3, 8));
-    boardPieces.push_back(new Piece("queen", 19, 4, 8));
-    boardPieces.push_back(new Piece("king", 20, 5, 8));
-    boardPieces.push_back(new Piece("bishop", 21, 6, 8));
-    boardPieces.push_back(new Piece("knight", 22, 7, 8));
-    boardPieces.push_back(new Piece("rook", 23, 8, 8));
-
-    // Initial position for black pawns
-    boardPieces.push_back(new Piece("pawn", 24, 1, 7));
-    boardPieces.push_back(new Piece("pawn", 25, 2, 7));
-    boardPieces.push_back(new Piece("pawn", 26, 3, 7));
-    boardPieces.push_back(new Piece("pawn", 27, 4, 7));
-    boardPieces.push_back(new Piece("pawn", 28, 5, 7));
-    boardPieces.push_back(new Piece("pawn", 29, 6, 7));
-    boardPieces.push_back(new Piece("pawn", 30, 7, 7));
-    boardPieces.push_back(new Piece("pawn", 31, 8, 7));
-
-    // Initialize piece location cache
-    pieceCache.emplace_back(8, true);
-    pieceCache.emplace_back(8, true);
-    pieceCache.emplace_back(8, false);
-    pieceCache.emplace_back(8, false);
-    pieceCache.emplace_back(8, false);
-    pieceCache.emplace_back(8, false);
-    pieceCache.emplace_back(8, true);
-    pieceCache.emplace_back(8, true);
+    board->GenerateBoard();
 }
 
 GameEngine::~GameEngine()
 {
-    for (auto piece : boardPieces)
-    {
-        delete piece;
-    }
+    delete board;
 }
 
 bool GameEngine::isSquareTaken(int file, int rank)
 {
-    // TODO: implement
-    return false;
-}
-
-void GameEngine::updateCache(int startFile, int startRank, int endFile, int endRank)
-{
-    // TODO: implement
+    if (NULL == board->GetPiece(file, rank)) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 bool GameEngine::knightValidator(int startFile, int startRank, int endFile, int endRank)
@@ -167,22 +114,11 @@ bool GameEngine::IsLegalMove(std::string pieceType, int startFile, int startRank
 
 bool GameEngine::Move(int startFile, int startRank, int endFile, int endRank)
 {
-    // TODO: write a UT for me...
-    Piece* movePiece;
+    Piece* movePiece = board->GetPiece(startFile, startRank);
 
-    for (auto piece : boardPieces)
-    {
-        if (startFile == piece->GetFile() && startRank == piece->GetRank()) {
-            movePiece = piece;
+    if (NULL != movePiece) {
+        if (true == IsLegalMove(movePiece->GetPiece(), startFile, startRank, endFile, endRank)) {
+            board->MovePiece(startFile, startRank, endFile, endRank);
         }
-    }
-
-    if (nullptr != movePiece && true == IsLegalMove(movePiece->GetPiece(), startFile,
-                                                    startRank, endFile, endRank)) {
-        movePiece->SetFile(endFile);
-        movePiece->SetRank(endRank);
-        return true;
-    } else {
-        return false;
     }
 }

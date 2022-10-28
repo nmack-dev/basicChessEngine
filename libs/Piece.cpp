@@ -6,11 +6,9 @@
 
 using namespace std;
 
-Piece::Piece(std::string piece, int id, int file, int rank) :
+Piece::Piece(string piece, string color, int id) :
     piece(piece),
-    id(id),
-    file(file),
-    rank(rank)
+    id(id)
 {}
 
 string Piece::GetPiece()
@@ -23,27 +21,12 @@ void Piece::SetPiece(std::string piece)
     piece = piece;
 }
 
+string Piece::GetColor()
+{
+    return color;
+}
+
 int Piece::GetId()
 {
     return id;
-}
-
-int Piece::GetFile()
-{
-    return file;
-}
-
-void Piece::SetFile(int file)
-{
-    file = file;
-}
-
-int Piece::GetRank()
-{
-    return rank;
-}
-
-void Piece::SetRank(int rank)
-{
-    rank = rank;
 }

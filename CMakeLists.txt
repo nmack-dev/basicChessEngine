@@ -10,7 +10,7 @@ set(SOURCES
         libs/Piece.cpp
         libs/GameEngine.cpp
         libs/Board.cpp
-        libs/Square.cpp)
+        )
 
 add_library(basicChessEngine_lib ${SOURCES})
 
